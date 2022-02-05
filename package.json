@@ -1,0 +1,32 @@
+{
+  "name": "gshare",
+  "version": "1.4.16",
+  "description": "A simple comment system based on Leancloud.",
+  "main": "dist/gshare.es.js",
+  "author": "xCss <xioveliu@gmail.com> (https://github.com/xCss)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "keywords": [
+    "simple",
+    "easy-to-use",
+    "fast-and-safe",
+    "comment-system"
+  ],
+  "license": "GPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gotapi/Valine.git"
+  },
+  "homepage": "https://github.com/gotapi/Valine#readme",
+  "devDependencies": {
+    "vite": "^2.7.2"
+  },
+  "dependencies": {
+    "axios": "^0.25.0",
+    "beselected": "^1.0.2",
+    "good-listener": "^1.2.2",
+    "pida": "^1.0.7"
+  }
+}
