@@ -25,8 +25,8 @@
   },
   "dependencies": {
     "axios": "^0.25.0",
-    "beselected": "^1.0.2",
+    "beselected": "^1.0.4",
     "good-listener": "^1.2.2",
-    "pida": "^1.0.7"
+    "pida": "^1.0.11"
   }
 }
