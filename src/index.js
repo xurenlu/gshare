@@ -11,7 +11,6 @@ import beselected from "beselected";
         return text.replaceAll("'", "").replaceAll('"', '')
     }
     let se = beselected()
-    pida.onDomReady(() => {
         console.log("dom ready ")
         se.init({
             trigger:document.body,
@@ -61,19 +60,18 @@ import beselected from "beselected";
             ".share-body { display:block;clear:both;}" +
             ".share-body textarea {display:block;min-height:120px;margin:8px 16px;}")
 //})
-    })
+
 
     const globalHooks = {};
-    pida.onDomReady(() => {
-        pida.addListener(document.body, "click", (evt) => {
+    pida.addListener(document.body, "click", (evt) => {
             let attr = evt.target.getAttribute("data-hook");
             if (attr) {
                 if (globalHooks[attr]) {
                     globalHooks[attr].call(evt.target, evt);
                 }
             }
-        })
     })
+
 
     globalHooks["share-card"] = (evt) => {
         let formSend = "type=json&url=" + encodeURIComponent(location.href) + "&content=" + encodeURIComponent(se.selectedText);
