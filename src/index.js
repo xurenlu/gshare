@@ -11,7 +11,7 @@ import beselected from "beselected";
         return text.replaceAll("'", "").replaceAll('"', '')
     }
     let se = beselected()
-        console.log("dom ready ")
+    
         se.init({
             trigger:document.body,
             popupCallback: (point) => {
@@ -25,15 +25,13 @@ import beselected from "beselected";
             },
             mainHandler: (text) => {
                 console.log("main handler called");
-                //console.log(se.selectedText);
-                // console.log(JSON.stringify(text));
+
 
                 let html = "<form id='share-form-gotapi'  method='GET'  action='https://service.weibo.com/share/share.php' target='_blank'>";
                 html += "<div data-theme='light' class='share-body'> <textarea name='title' style='display: block;'>";
                 html += purify(se.selectedText) + "</textarea>";
                 html += '<input type="hidden" id="gotapi_form_url" name="url" value="' + location.href + '"/>';
-                html += '<input type="hidden" name="text" value="' + purify(se.selectedText) + '"/>' +
-                    "<a href='#'><img src='" + weiboImg + "' width='32' data-hook='send-weibo'/></a>" +
+                html += "<a href='#'><img src='" + weiboImg + "' width='32' data-hook='send-weibo'/></a>" +
                     "<a href='#'><img src='" + twitterImg + "' width='32' data-hook='send-twitter'/></a>"
                     + '<a href="#"><img src="' + goldImg + '" width="32" data-hook="share-card"/></a>'
 
@@ -74,30 +72,10 @@ import beselected from "beselected";
 
 
     globalHooks["share-card"] = (evt) => {
-        let formSend = "type=json&url=" + encodeURIComponent(location.href) + "&content=" + encodeURIComponent(se.selectedText);
-
-        pida.post("https://gotapi.net/v3/api/text2pic", {
-                "timeout": 15000,
-                "headers": {
-                    "secret": secret,
-                    "Content-Type": "application/x-www-form-urlencoded"
-                }
-            },
-            formSend).then((data) => {
-            if (data.code === 200) {
-                let a = document.createElement("A");
-                a.href = "data:" + data.type + ";" + data.data;
-                a.download = `gotapi-${new Date().toISOString()}.png`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            } else {
-                pida.$(".gotapi-bottom span").text("出错了.." + data.msg);
-                setTimeout(() => {
-                    pida.$(".gotapi-bottom span").text("由gotapi.net提供划词支持")
-                }, 3000)
-            }
-        });
+        let url = "https://poet.404.ms/"
+        let form = pida.$("#share-form-gotapi").elements[0]
+        form.setAttribute("action", url)
+        form.submit()
     }
     globalHooks["send-weibo"] = (evt) => {
         let url = "https://service.weibo.com/share/share.php"
